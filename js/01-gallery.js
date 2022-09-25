@@ -21,7 +21,7 @@ function renderMarkup(items) {
       class="gallery__image"
       src="${preview}"
       data-source="${original}"
-      alt="${preview}"
+      alt="${description}"
     />
   </a>
 </div>`;
@@ -46,7 +46,7 @@ function onClickGetModal(evt) {
   const currentImage = evt.target;
 
   const instance = basicLightbox.create(`
-        <img src="${currentImage.dataset.source}" >
+        <img src="${currentImage.dataset.source}" alt="${currentImage["alt"]}" >
         `);
   instance.show();
 
@@ -58,6 +58,36 @@ function onClickGetModal(evt) {
     // console.log(evt.key);
     if (evt.key === "Escape") {
       instance.close();
+      document.removeEventListener("keydown", onCloseModal);
     }
   }
 }
+
+// const instance = {
+//   openImage(image) {
+//     const instance = basicLightbox.create(`
+//       <img src="${image.dataset.source}" >
+//        `);
+//     instance.show();
+//   },
+//   closeImage() {
+//     document.addEventListener("keydown", (evt) => {
+//       if (evt.key === "Escape") {
+//         instance.close();
+//       }
+//     });
+//   },
+// };
+
+// function onClickGetModal(evt) {
+//   evt.preventDefault();
+//   const isImage = evt.target.classList.contains("gallery__image");
+
+//   if (!isImage) {
+//     return;
+//   }
+//   const currentImage = evt.target;
+
+//   instance.openImage(currentImage);
+//   instance.closeImage();
+// }
